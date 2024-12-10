@@ -1,0 +1,100 @@
+/* --> ## MAIN NAVBAR ## <-- */
+div.container-fluid {
+    background: #130044;
+    box-shadow: 0px 10px 50px rgba(19, 0, 68, 0.25);
+    border-radius: 0.625rem;
+    margin: 1.125rem 1.25rem 0rem 1.25rem;
+    min-height: 5.813rem;
+    height: 100px;
+}
+
+/* ## NAVBAR LOGO ## */
+.navbar-brand {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+}
+
+/* ## BACKGROUND DROPDOWNS NAVBAR ## */
+li.list-group-item {
+    background: transparent;
+    border: none;
+}
+
+/* ## MENU DROPDOWNS NAVBAR ## */
+.dropdown-menu {
+    border-radius: 0.625rem;
+    min-width: inherit;
+    padding: 0.25rem;
+}
+
+/* ## RIMUOVE L'HOVER AL PASSAGGIO DEL MOUSE ## */
+button:hover,
+li.dropdown-item {
+    background-color: transparent;
+}
+
+/* --> ## USER DROPDOWN ## <-- */
+.user-menu {
+    border: none;
+    background: transparent;
+    color: white;
+    white-space: nowrap;
+}
+
+/* ## PROFILE PICTURE NAVBAR ## */
+img.rounded-5 {
+    object-fit: cover;
+}
+
+/* --> ## NOTIFICATION DROPDOWN ## <-- */
+.badge {
+    background-color: white;
+    color: #130044;
+}
+
+/* ## NASCONDE LA FRECCETTA DEL TOGGLE DALLE NOTIFICHE ## */
+.dropdown-notification-toggle {
+    color: #130044;
+}
+
+/* ## METTE ".." SE IL MESSAGGIO NOTIFICA TROPPO LUNGO ## */
+.notification-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 21rem;
+}
+
+/* ## COLORA LE NUOVE NOTIFICHE ## */
+.notification-text-new {
+    color: #130044;
+}
+
+/* ## MIN SIZE NOTIFICATION MENU ## */
+ul.dropdown-menu {
+    min-width: 15rem;
+    max-height: 10rem;
+    overflow-y: auto;
+}
+
+/* ## COLORE QUANDO CLICCHI SU LEGGI TUTTO ## */
+li:active {
+    color: #130044;
+}
+
+hr.dropdown-divider {
+    margin: auto;
+    margin-top: 0.125rem;
+    margin-bottom: 0.125rem;
+}
+
+.home {
+    position: absolute;
+    left: -800px;
+    top: -5px;
+    height: 25px;
+    width: 25px;
+
+}
