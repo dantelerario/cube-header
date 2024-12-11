@@ -350,18 +350,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                 }] }]; } });
 
 class HeaderModule {
-    static forRoot(config) {
-        console.log('forRoot called:', config);
-        return {
-            ngModule: HeaderModule,
-            providers: [
-                {
-                    provide: 'SHARED_CONFIG',
-                    useValue: config
-                }
-            ]
-        };
-    }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: HeaderModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
     static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: HeaderModule, declarations: [HeaderComponent], imports: [CommonModule,
             TranslateModule,
@@ -371,7 +359,19 @@ class HeaderModule {
     static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: HeaderModule, providers: [
             AuthService,
             UserService,
-            WebSocketService
+            WebSocketService,
+            {
+                provide: 'SHARED_CONFIG',
+                useValue: {
+                    // valori di default che possono essere sovrascritti dall'app
+                    separator: ':',
+                    baseUrl: 'http://localhost',
+                    basePort: '8101',
+                    basePortPortal: '8100',
+                    redirectUri: 'http://localhost:4201',
+                    loginRedirectChatHomePage: 'http://localhost:4201'
+                }
+            }
         ], imports: [CommonModule,
             TranslateModule,
             FontAwesomeModule,
@@ -393,7 +393,19 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                     providers: [
                         AuthService,
                         UserService,
-                        WebSocketService
+                        WebSocketService,
+                        {
+                            provide: 'SHARED_CONFIG',
+                            useValue: {
+                                // valori di default che possono essere sovrascritti dall'app
+                                separator: ':',
+                                baseUrl: 'http://localhost',
+                                basePort: '8101',
+                                basePortPortal: '8100',
+                                redirectUri: 'http://localhost:4201',
+                                loginRedirectChatHomePage: 'http://localhost:4201'
+                            }
+                        }
                     ]
                 }]
         }] });
