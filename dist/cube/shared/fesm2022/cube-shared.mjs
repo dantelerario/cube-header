@@ -351,6 +351,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
 
 class HeaderModule {
     static forRoot(config) {
+        console.log('forRoot called:', config);
         return {
             ngModule: HeaderModule,
             providers: [

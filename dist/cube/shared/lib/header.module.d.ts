@@ -13,3 +13,4 @@ export declare class HeaderModule {
     static ɵmod: i0.ɵɵNgModuleDeclaration<HeaderModule, [typeof i1.HeaderComponent], [typeof i2.CommonModule, typeof i3.TranslateModule, typeof i4.FontAwesomeModule, typeof i5.NgbModule, typeof i6.RouterModule], [typeof i1.HeaderComponent]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<HeaderModule>;
 }
+export { SharedConfig };

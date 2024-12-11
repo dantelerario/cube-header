@@ -29,6 +29,7 @@ import { WebSocketService } from './services/websocket/websocket.service';
 })
 export class HeaderModule {
   static forRoot(config: SharedConfig): ModuleWithProviders<HeaderModule> {
+    console.log('forRoot called:',config);
     return {
       ngModule: HeaderModule,
       providers: [
@@ -40,3 +41,5 @@ export class HeaderModule {
     };
   }
 }
+
+export { SharedConfig };
