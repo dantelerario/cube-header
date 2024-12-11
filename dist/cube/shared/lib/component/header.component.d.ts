@@ -25,5 +25,5 @@ export declare class HeaderComponent implements OnInit {
     changeLanguage(lang: string): void;
     updateStatus(status: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<HeaderComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<HeaderComponent, "cube-shared", never, { "auth": { "alias": "auth"; "required": false; }; "webSocket": { "alias": "webSocket"; "required": false; }; "userService": { "alias": "userService"; "required": false; }; "properties": { "alias": "properties"; "required": false; }; "keycloakLoginOptions": { "alias": "keycloakLoginOptions"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<HeaderComponent, "cube-header", never, { "auth": { "alias": "auth"; "required": false; }; "webSocket": { "alias": "webSocket"; "required": false; }; "userService": { "alias": "userService"; "required": false; }; "properties": { "alias": "properties"; "required": false; }; "keycloakLoginOptions": { "alias": "keycloakLoginOptions"; "required": false; }; }, {}, never, never, false, never>;
 }

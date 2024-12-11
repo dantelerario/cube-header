@@ -6,7 +6,7 @@ import { KeycloakLoginOptions } from 'keycloak-js';
 import { AuthService, Language, Status, UserDTO, UserService, WebSocketService } from '../types/types';
 
 @Component({
-  selector: 'cube-shared',
+  selector: 'cube-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   @Input() auth!: AuthService;
   @Input() webSocket!: WebSocketService;
   @Input() userService!: UserService;
-  @Input() properties: any; // Tipo da definire in base alle tue properties
+  @Input() properties: any;
   @Input() keycloakLoginOptions!: KeycloakLoginOptions;
 
   userDTO?: UserDTO;

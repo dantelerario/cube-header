@@ -42,3 +42,25 @@ export interface AuthService {
 export interface UserService {
     updateStatus(status: string): Observable<any>;
 }
+export type PermissionDto = {
+    id: number;
+    description: string;
+    code: string;
+    isSelected: string;
+};
+export type PaginatedUsersDTO = {
+    usersDTO: UserDTO[];
+    usersTotalCount: number;
+};
+export type IsWritingDto = {
+    chatId: string;
+    userId: string;
+    isWriting: boolean;
+};
+export type MessageTriggerDTO = {
+    chatId: number;
+    message: string;
+    receiverId?: string;
+    senderId?: string;
+    receiverIdGroup?: string[];
+};
