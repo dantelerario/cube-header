@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -7,9 +7,7 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './component/header.component';
 import { AuthService } from './services/auth/auth.service';
 import { UserService } from './services/user/user.service';
-import { SharedConfig } from './shared.interface';
 import { WebSocketService } from './services/websocket/websocket.service';
-
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -24,22 +22,19 @@ import { WebSocketService } from './services/websocket/websocket.service';
   providers: [
     AuthService,
     UserService,
-    WebSocketService
+    WebSocketService,
+    {
+      provide: 'SHARED_CONFIG',
+      useValue: {
+        // valori di default che possono essere sovrascritti dall'app
+        separator: ':',
+        baseUrl: 'http://localhost',
+        basePort: '8101',
+        basePortPortal: '8100',
+        redirectUri: 'http://localhost:4201',
+        loginRedirectChatHomePage: 'http://localhost:4201'
+      }
+    }
   ]
 })
-export class HeaderModule {
-  static forRoot(config: SharedConfig): ModuleWithProviders<HeaderModule> {
-    console.log('forRoot called:',config);
-    return {
-      ngModule: HeaderModule,
-      providers: [
-        {
-          provide: 'SHARED_CONFIG',
-          useValue: config
-        }
-      ]
-    };
-  }
-}
-
-export { SharedConfig };
+export class HeaderModule { }
