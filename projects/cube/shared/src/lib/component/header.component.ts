@@ -1,9 +1,13 @@
-import { Component,Input,OnInit } from '@angular/core';
+import { Component,OnInit,Inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { faCube } from '@fortawesome/free-solid-svg-icons';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakLoginOptions } from 'keycloak-js';
-import { AuthService, Language, Status, UserDTO, UserService, WebSocketService } from '../types/types';
+import { SharedConfig } from '../shared.interface';
+import { AuthService } from '../services/auth/auth.service';
+import { UserService } from '../services/user/user.service';
+import { WebSocketService } from '../services/websocket/websocket.service';
+import { Language,Status,UserDTO } from '../types/types';
 
 @Component({
   selector: 'cube-header',
@@ -11,12 +15,6 @@ import { AuthService, Language, Status, UserDTO, UserService, WebSocketService }
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Input() auth!: AuthService;
-  @Input() webSocket!: WebSocketService;
-  @Input() userService!: UserService;
-  @Input() properties: any;
-  @Input() keycloakLoginOptions!: KeycloakLoginOptions;
-
   userDTO?: UserDTO;
   imgSrc?: string = 'assets/images/profile.jpg';
   icon = faCube;
@@ -41,8 +39,13 @@ export class HeaderComponent implements OnInit {
   constructor(
     private keycloak: KeycloakService,
     private translateService: TranslateService,
+    private auth: AuthService,
+    private webSocket: WebSocketService,
+    private userService: UserService,
+    @Inject('SHARED_CONFIG') private config: SharedConfig
   ) {
-    this.languages.push(
+    console.log('HeaderComponent costruttore chiamato');
+    this.languages = [
       {
         name: 'English',
         langIdentifier: 'en-EN',
@@ -58,52 +61,42 @@ export class HeaderComponent implements OnInit {
         langIdentifier: 'fr-FR',
         flagPath: 'assets/images/fr-FR.png',
       }
-    );
-    this.languages.sort();
+    ].sort();
   }
 
-  //Questo ngOnInit ascolta le modifiche nell'oggetto userDTO all'interno del servizio
-  //auth e aggiorna le proprietà del componente (userDTO e la lingua predefinita tramite
-  //TranslateService) in base a tali modifiche. Questo può essere utilizzato per inizializzare
-  //o aggiornare le informazioni del componente in base allo stato dell'utente.
   ngOnInit(): void {
-    // Sottoscrizione all'observable userDTOBehaviorSubject all'interno del servizio auth
     this.auth.userDTOBehaviorSubject.subscribe({
       next: (receivedUserDTO: any) => {
-        // La funzione di callback 'next' viene chiamata quando c'è una modifica nell'oggetto userDTO
-        // Imposta la proprietà userDTO del componente con il nuovo valore ricevuto
         this.userDTO = receivedUserDTO;
-        this.translateService.use(
-          // Utilizza il servizio di traduzione (TranslateService) per impostare la lingua predefinita
-          // dall'oggetto propertiesDTO dell'utente corrente
-          this.userDTO?.propertiesDTO?.defaultLanguage!
-        );
+        if (this.userDTO?.propertiesDTO?.defaultLanguage) {
+          this.translateService.use(this.userDTO.propertiesDTO.defaultLanguage);
+        }
       },
     });
   }
 
   login() {
-    this.keycloak.login(this.keycloakLoginOptions);
-    // this.keycloak.getKeycloakInstance().onAuthLogout()
+    this.keycloak.login({
+      redirectUri: this.config.loginRedirectChatHomePage 
+    });
   }
 
   logout(): void {
     this.webSocket.disconnect().then(() => {
-      this.keycloak.logout(this.properties.redirectUri);
+      this.keycloak.logout(this.config.redirectUri);
     });
   }
 
   changeLanguage(lang: string) {
-    // Utilizza il servizio di traduzione (TranslateService) per impostare la lingua dell'applicazione
     this.translateService.use(lang);
   }
 
   updateStatus(status: string) {
     this.userService.updateStatus(status).subscribe({
       next: (response) => {
-        if (response && this.userDTO) {  // aggiungi controllo
+        if (response && this.userDTO) {
           this.userDTO.propertiesDTO!.status = status;
-          this.auth.userDTOBehaviorSubject.next(this.userDTO);  // ora TypeScript sa che userDTO non è undefined
+          this.auth.userDTOBehaviorSubject.next(this.userDTO);
         }
       },
     });
