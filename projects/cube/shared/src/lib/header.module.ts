@@ -20,21 +20,21 @@ import { WebSocketService } from './services/websocket/websocket.service';
   ],
   exports: [HeaderComponent],
   providers: [
-    AuthService,
-    UserService,
-    WebSocketService,
-    {
-      provide: 'SHARED_CONFIG',
-      useValue: {
-        // valori di default che possono essere sovrascritti dall'app
-        separator: ':',
-        baseUrl: 'http://localhost',
-        basePort: '8101',
-        basePortPortal: '8100',
-        redirectUri: 'http://localhost:4201',
-        loginRedirectChatHomePage: 'http://localhost:4201'
-      }
-    }
+    // AuthService,
+    // UserService,
+    // WebSocketService,
+    // {
+    //   provide: 'SHARED_CONFIG',
+    //   useValue: {
+    //     // valori di default che possono essere sovrascritti dall'app
+    //     separator: ':',
+    //     baseUrl: 'http://localhost',
+    //     basePort: '8101',
+    //     basePortPortal: '8100',
+    //     redirectUri: 'http://localhost:4201',
+    //     loginRedirectChatHomePage: 'http://localhost:4201'
+    //   }
+    // }
   ]
 })
 export class HeaderModule {
