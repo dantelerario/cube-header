@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { KeycloakService } from 'keycloak-angular';
+import { KeycloakLoginOptions } from 'keycloak-js';
 import { SharedConfig } from '../shared.interface';
 import { AuthService } from '../services/auth/auth.service';
 import { UserService } from '../services/user/user.service';
@@ -19,6 +20,7 @@ export declare class HeaderComponent implements OnInit {
     icon: import("@fortawesome/fontawesome-common-types").IconDefinition;
     languages: Language[];
     isNavbarCollapsed: boolean;
+    keycloakLoginOptions: KeycloakLoginOptions;
     stati: Status[];
     constructor(keycloak: KeycloakService, translateService: TranslateService, auth: AuthService, webSocket: WebSocketService, userService: UserService, config: SharedConfig);
     ngOnInit(): void;

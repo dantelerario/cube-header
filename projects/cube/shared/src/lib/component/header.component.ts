@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   icon = faCube;
   languages: Language[] = [];
   isNavbarCollapsed = true;
+  keycloakLoginOptions: KeycloakLoginOptions;  // aggiunto
 
   stati: Status[] = [
     {
@@ -45,6 +46,9 @@ export class HeaderComponent implements OnInit {
     @Inject('SHARED_CONFIG') private config: SharedConfig
   ) {
     console.log('HeaderComponent costruttore chiamato');
+    this.keycloakLoginOptions = {  // inizializzato nel costruttore
+      redirectUri: this.config.loginRedirectChatHomePage,
+    };
     this.languages = [
       {
         name: 'English',
@@ -76,9 +80,7 @@ export class HeaderComponent implements OnInit {
   }
 
   login() {
-    this.keycloak.login({
-      redirectUri: this.config.loginRedirectChatHomePage 
-    });
+    this.keycloak.login(this.keycloakLoginOptions);
   }
 
   logout(): void {

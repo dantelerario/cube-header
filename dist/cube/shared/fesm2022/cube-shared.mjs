@@ -280,6 +280,9 @@ class HeaderComponent {
             },
         ];
         console.log('HeaderComponent costruttore chiamato');
+        this.keycloakLoginOptions = {
+            redirectUri: this.config.loginRedirectChatHomePage,
+        };
         this.languages = [
             {
                 name: 'English',
@@ -309,9 +312,7 @@ class HeaderComponent {
         });
     }
     login() {
-        this.keycloak.login({
-            redirectUri: this.config.loginRedirectChatHomePage
-        });
+        this.keycloak.login(this.keycloakLoginOptions);
     }
     logout() {
         this.webSocket.disconnect().then(() => {
