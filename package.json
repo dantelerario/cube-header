@@ -10,7 +10,6 @@
     },
     ".": {
       "types": "./dist/cube/header/index.d.ts",
-      "esm2022": "./dist/cube/header/esm2022/cube-header.mjs",
       "esm": "./dist/cube/header/esm2022/cube-header.mjs",
       "default": "./dist/cube/header/fesm2022/cube-header.mjs"
     }

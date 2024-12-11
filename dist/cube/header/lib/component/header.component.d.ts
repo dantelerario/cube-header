@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakLoginOptions } from 'keycloak-js';
-import { AuthService, Language, Status, UserDTO, UserService, WebSocketService } from './types/types';
+import { AuthService, Language, Status, UserDTO, UserService, WebSocketService } from '../types/types';
 import * as i0 from "@angular/core";
 export declare class HeaderComponent implements OnInit {
     private keycloak;

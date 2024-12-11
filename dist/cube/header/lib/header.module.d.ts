@@ -1,5 +1,5 @@
 import * as i0 from "@angular/core";
-import * as i1 from "./header.component";
+import * as i1 from "./component/header.component";
 import * as i2 from "@angular/common";
 import * as i3 from "@ngx-translate/core";
 import * as i4 from "@fortawesome/angular-fontawesome";

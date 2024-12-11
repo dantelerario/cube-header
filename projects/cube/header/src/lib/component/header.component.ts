@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { faCube } from '@fortawesome/free-solid-svg-icons';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakLoginOptions } from 'keycloak-js';
-import { AuthService, Language, Status, UserDTO, UserService, WebSocketService } from './types/types';
+import { AuthService, Language, Status, UserDTO, UserService, WebSocketService } from '../types/types';
 
 @Component({
   selector: 'cube-header',

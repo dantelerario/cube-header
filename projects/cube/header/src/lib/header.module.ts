@@ -4,7 +4,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
-import { HeaderComponent } from './header.component';
+import { HeaderComponent } from './component/header.component';
+
 
 @NgModule({
   declarations: [HeaderComponent],
