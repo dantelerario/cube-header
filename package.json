@@ -1,17 +1,17 @@
 {
-  "name": "@cube/header",
+  "name": "@cube/shared",
   "version": "0.0.1",
-  "main": "./dist/cube/header/fesm2022/cube-header.mjs",
-  "module": "./dist/cube/header/fesm2022/cube-header.mjs",
-  "typings": "./dist/cube/header/index.d.ts",
+  "main": "./dist/cube/shared/fesm2022/cube-shared.mjs",
+  "module": "./dist/cube/shared/fesm2022/cube-shared.mjs",
+  "typings": "./dist/cube/shared/index.d.ts",
   "exports": {
     "./package.json": {
       "default": "./package.json"
     },
     ".": {
-      "types": "./dist/cube/header/index.d.ts",
-      "esm": "./dist/cube/header/esm2022/cube-header.mjs",
-      "default": "./dist/cube/header/fesm2022/cube-header.mjs"
+      "types": "./dist/cube/shared/index.d.ts",
+      "esm": "./dist/cube/shared/esm2022/cube-shared.mjs",
+      "default": "./dist/cube/shared/fesm2022/cube-shared.mjs"
     }
   },
   "scripts": {

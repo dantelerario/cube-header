@@ -3,8 +3,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@cube/header": [
-        "dist/cube/header"
+      "@cube/shared": [
+        "dist/cube/shared"
       ]
     },
     "baseUrl": "./",

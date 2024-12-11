@@ -1,6 +1,0 @@
-/*
- * Public API Surface of header
- */
-export * from './lib/component/header.component';
-export * from './lib/header.module';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3Byb2plY3RzL2N1YmUvaGVhZGVyL3NyYy9wdWJsaWMtYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztHQUVHO0FBQ0gsY0FBYyxrQ0FBa0MsQ0FBQztBQUNqRCxjQUFjLHFCQUFxQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBoZWFkZXJcbiAqL1xuZXhwb3J0ICogZnJvbSAnLi9saWIvY29tcG9uZW50L2hlYWRlci5jb21wb25lbnQnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvaGVhZGVyLm1vZHVsZSc7Il19

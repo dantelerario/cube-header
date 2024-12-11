@@ -3,23 +3,23 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "@cube/header": {
+    "@cube/shared": {
       "projectType": "library",
-      "root": "projects/cube/header",
-      "sourceRoot": "projects/cube/header/src",
+      "root": "projects/cube/shared",
+      "sourceRoot": "projects/cube/shared/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/cube/header/ng-package.json"
+            "project": "projects/cube/shared/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/cube/header/tsconfig.lib.prod.json"
+              "tsConfig": "projects/cube/shared/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/cube/header/tsconfig.lib.json"
+              "tsConfig": "projects/cube/shared/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -27,7 +27,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/cube/header/tsconfig.spec.json",
+            "tsConfig": "projects/cube/shared/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"

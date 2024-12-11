@@ -6,7 +6,7 @@ import { KeycloakLoginOptions } from 'keycloak-js';
 import { AuthService, Language, Status, UserDTO, UserService, WebSocketService } from '../types/types';
 
 @Component({
-  selector: 'cube-header',
+  selector: 'cube-shared',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
