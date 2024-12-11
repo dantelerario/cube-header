@@ -37,4 +37,8 @@ import { WebSocketService } from './services/websocket/websocket.service';
     }
   ]
 })
-export class HeaderModule { }
+export class HeaderModule {
+  constructor() {
+    console.log('HeaderModule initialized');
+  }
+}
