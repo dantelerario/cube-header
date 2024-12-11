@@ -1,0 +1,6 @@
+/*
+ * Public API Surface of Cube Shared
+ */
+export * from './lib/component/header.component';
+export * from './lib/header.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3Byb2plY3RzL2N1YmUvc2hhcmVkL3NyYy9wdWJsaWMtYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztHQUVHO0FBQ0gsY0FBYyxrQ0FBa0MsQ0FBQztBQUNqRCxjQUFjLHFCQUFxQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBDdWJlIFNoYXJlZFxuICovXG5leHBvcnQgKiBmcm9tICcuL2xpYi9jb21wb25lbnQvaGVhZGVyLmNvbXBvbmVudCc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9oZWFkZXIubW9kdWxlJzsiXX0=
