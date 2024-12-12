@@ -8,7 +8,7 @@ import { HeaderComponent } from './component/header.component';
 import { AuthService } from './services/auth/auth.service';
 import { UserService } from './services/user/user.service';
 import { WebSocketService } from './services/websocket/websocket.service';
-
+import { SharedConfig } from './shared.interface';
 @NgModule({
   declarations: [HeaderComponent],
   imports: [
@@ -18,27 +18,21 @@ import { WebSocketService } from './services/websocket/websocket.service';
     NgbModule,
     RouterModule
   ],
-  exports: [HeaderComponent],
-  providers: [
-    // AuthService,
-    // UserService,
-    // WebSocketService,
-    // {
-    //   provide: 'SHARED_CONFIG',
-    //   useValue: {
-    //     // valori di default che possono essere sovrascritti dall'app
-    //     separator: ':',
-    //     baseUrl: 'http://localhost',
-    //     basePort: '8101',
-    //     basePortPortal: '8100',
-    //     redirectUri: 'http://localhost:4201',
-    //     loginRedirectChatHomePage: 'http://localhost:4201'
-    //   }
-    // }
-  ]
+  exports: [HeaderComponent]
 })
 export class HeaderModule {
-  constructor() {
-    console.log('HeaderModule initialized');
+  static forRoot(config: SharedConfig) {
+    return {
+      ngModule: HeaderModule,
+      providers: [
+        AuthService,
+        UserService,
+        WebSocketService,
+        {
+          provide: 'SHARED_CONFIG',
+          useValue: config
+        }
+      ]
+    };
   }
 }
