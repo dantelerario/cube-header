@@ -68,17 +68,37 @@ export class HeaderComponent implements OnInit {
     ].sort();
   }
 
+  // ngOnInit(): void {
+  //   this.auth.userDTOBehaviorSubject.subscribe({
+  //     next: (receivedUserDTO: any) => {
+  //       this.userDTO = receivedUserDTO;
+  //       if (this.userDTO?.propertiesDTO?.defaultLanguage) {
+  //         this.translateService.use(this.userDTO.propertiesDTO.defaultLanguage);
+  //       }
+  //     },
+  //   });
+  // }
+
   ngOnInit(): void {
+    this.keycloak.isLoggedIn().then(isLoggedIn => {
+      if (isLoggedIn) {
+        this.keycloak.loadUserProfile().then(profile => {
+          this.auth.updateKeycloakProfile(profile);
+        });
+      }
+    });
+
     this.auth.userDTOBehaviorSubject.subscribe({
-      next: (receivedUserDTO: any) => {
-        this.userDTO = receivedUserDTO;
-        if (this.userDTO?.propertiesDTO?.defaultLanguage) {
-          this.translateService.use(this.userDTO.propertiesDTO.defaultLanguage);
+      next: (receivedUserDTO) => {
+        if (receivedUserDTO) {
+          this.userDTO = receivedUserDTO;
+          if (receivedUserDTO.propertiesDTO?.defaultLanguage) {
+            this.translateService.use(receivedUserDTO.propertiesDTO.defaultLanguage);
+          }
         }
-      },
+      }
     });
   }
-
   login() {
     this.keycloak.login(this.keycloakLoginOptions);
   }

@@ -4,7 +4,7 @@ import { faCube } from '@fortawesome/free-solid-svg-icons';
 import * as i2 from 'keycloak-angular';
 import * as i2$1 from '@ngx-translate/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { BehaviorSubject, filter, switchMap, Subject } from 'rxjs';
+import { BehaviorSubject, filter, switchMap, catchError, of, Subject } from 'rxjs';
 import * as i1 from '@angular/common/http';
 import * as Stomp from 'stompjs';
 import * as SockJs from 'sockjs-client';
@@ -76,6 +76,24 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                 }] }]; } });
 
 class AuthService {
+    // constructor(
+    //     private http: HttpClient,
+    //     private userService: UserService,
+    //     @Inject('SHARED_CONFIG') private config: SharedConfig
+    // ) {
+    //     // Sottoscrizione per gestire gli aggiornamenti del profilo Keycloak
+    //     this.userKeycloakBehaviorSubject.pipe(
+    //         filter(userKeycloak => !!userKeycloak),
+    //         switchMap(userKeycloak =>
+    //             userService.save().pipe(
+    //                 switchMap(() => userService.getUser(userKeycloak!.id!))
+    //             )
+    //         )
+    //     ).subscribe(userDTO => {
+    //         this.userDTO = userDTO;
+    //         this.userDTOBehaviorSubject.next(userDTO);
+    //     });
+    // }
     constructor(http, userService, config) {
         this.http = http;
         this.userService = userService;
@@ -83,10 +101,15 @@ class AuthService {
         // BehaviorSubjects per lo stato dell'utente
         this.userDTOBehaviorSubject = new BehaviorSubject(undefined);
         this.userKeycloakBehaviorSubject = new BehaviorSubject(undefined);
-        // Sottoscrizione per gestire gli aggiornamenti del profilo Keycloak
-        this.userKeycloakBehaviorSubject.pipe(filter(userKeycloak => !!userKeycloak), switchMap(userKeycloak => userService.save().pipe(switchMap(() => userService.getUser(userKeycloak.id))))).subscribe(userDTO => {
-            this.userDTO = userDTO;
-            this.userDTOBehaviorSubject.next(userDTO);
+        // Add error handling and proper sequencing
+        this.userKeycloakBehaviorSubject.pipe(filter(userKeycloak => !!userKeycloak?.id), switchMap(userKeycloak => userService.save().pipe(catchError(() => of(null)), switchMap(() => userService.getUser(userKeycloak.id))))).subscribe({
+            next: userDTO => {
+                if (userDTO) {
+                    this.userDTO = userDTO;
+                    this.userDTOBehaviorSubject.next(userDTO);
+                }
+            },
+            error: () => this.reset()
         });
     }
     // Metodo per aggiornare il profilo Keycloak
@@ -301,14 +324,33 @@ class HeaderComponent {
             }
         ].sort();
     }
+    // ngOnInit(): void {
+    //   this.auth.userDTOBehaviorSubject.subscribe({
+    //     next: (receivedUserDTO: any) => {
+    //       this.userDTO = receivedUserDTO;
+    //       if (this.userDTO?.propertiesDTO?.defaultLanguage) {
+    //         this.translateService.use(this.userDTO.propertiesDTO.defaultLanguage);
+    //       }
+    //     },
+    //   });
+    // }
     ngOnInit() {
+        this.keycloak.isLoggedIn().then(isLoggedIn => {
+            if (isLoggedIn) {
+                this.keycloak.loadUserProfile().then(profile => {
+                    this.auth.updateKeycloakProfile(profile);
+                });
+            }
+        });
         this.auth.userDTOBehaviorSubject.subscribe({
             next: (receivedUserDTO) => {
-                this.userDTO = receivedUserDTO;
-                if (this.userDTO?.propertiesDTO?.defaultLanguage) {
-                    this.translateService.use(this.userDTO.propertiesDTO.defaultLanguage);
+                if (receivedUserDTO) {
+                    this.userDTO = receivedUserDTO;
+                    if (receivedUserDTO.propertiesDTO?.defaultLanguage) {
+                        this.translateService.use(receivedUserDTO.propertiesDTO.defaultLanguage);
+                    }
                 }
-            },
+            }
         });
     }
     login() {
