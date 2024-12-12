@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleWithProviders,NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -9,6 +9,8 @@ import { AuthService } from './services/auth/auth.service';
 import { UserService } from './services/user/user.service';
 import { WebSocketService } from './services/websocket/websocket.service';
 import { SharedConfig } from './types/shared.interface';
+import { NotificationService } from './services/notification/notification.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -17,7 +19,8 @@ import { SharedConfig } from './types/shared.interface';
     TranslateModule,
     FontAwesomeModule,
     NgbModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   exports: [HeaderComponent]
 })
@@ -26,12 +29,25 @@ export class HeaderModule {
     return {
       ngModule: HeaderModule,
       providers: [
+        NotificationService,
         AuthService,
         UserService,
         WebSocketService,
         {
           provide: 'SHARED_CONFIG',
           useValue: config
+        },
+        {
+          provide: 'BASE_URL',
+          useValue: config.baseUrl
+        },
+        {
+          provide: 'BASE_PORT',
+          useValue: config.basePort
+        },
+        {
+          provide: 'SEPARATOR',
+          useValue: config.separator
         }
       ]
     };

@@ -14,5 +14,6 @@ export const WEBSOCKET_ENDPOINTS = {
     PRIVATE_SUBSCRIPTION: '/private',
     STATUS_SUBSCRIPTION: '/status',
     IS_WRITING_SUBSCRIPTION: '/is-writing',
-    CHECK_SUBSCRIPTION: '/check'
+    CHECK_SUBSCRIPTION: '/check',
+    NOTIFICATION_SUBSCRIPTION: '/notification'
 } as const;

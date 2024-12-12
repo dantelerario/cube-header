@@ -5,4 +5,5 @@ export interface SharedConfig {
     basePortPortal: string;
     redirectUri: string;
     loginRedirectChatHomePage: string;
+    appIdentifier: string;
 }

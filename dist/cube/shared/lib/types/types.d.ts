@@ -64,3 +64,14 @@ export type MessageTriggerDTO = {
     senderId?: string;
     receiverIdGroup?: string[];
 };
+export type Notification = {
+    id: number;
+    message: string;
+    sentAt: string | null;
+    read: boolean;
+    app: string;
+};
+export type PaginatedNotificationsDTO = {
+    notificationDTO: Notification[];
+    notificationTotalCount: number;
+};

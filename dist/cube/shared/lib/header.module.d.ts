@@ -7,9 +7,10 @@ import * as i3 from "@ngx-translate/core";
 import * as i4 from "@fortawesome/angular-fontawesome";
 import * as i5 from "@ng-bootstrap/ng-bootstrap";
 import * as i6 from "@angular/router";
+import * as i7 from "@angular/common/http";
 export declare class HeaderModule {
     static forRoot(config: SharedConfig): ModuleWithProviders<HeaderModule>;
     static ɵfac: i0.ɵɵFactoryDeclaration<HeaderModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<HeaderModule, [typeof i1.HeaderComponent], [typeof i2.CommonModule, typeof i3.TranslateModule, typeof i4.FontAwesomeModule, typeof i5.NgbModule, typeof i6.RouterModule], [typeof i1.HeaderComponent]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<HeaderModule, [typeof i1.HeaderComponent], [typeof i2.CommonModule, typeof i3.TranslateModule, typeof i4.FontAwesomeModule, typeof i5.NgbModule, typeof i6.RouterModule, typeof i7.HttpClientModule], [typeof i1.HeaderComponent]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<HeaderModule>;
 }

@@ -21,6 +21,7 @@ export declare class WebSocketService implements OnDestroy {
     othersWriting: BehaviorSubject<{
         [idChat: string]: string[];
     }>;
+    newNotification: Subject<boolean>;
     constructor(authService: AuthService, keycloak: KeycloakService, config: SharedConfig);
     private getWebSocketUrl;
     connect(): void;
@@ -33,6 +34,7 @@ export declare class WebSocketService implements OnDestroy {
     readMessage(id: number): void;
     privateSubscription(): void;
     statusSubscription(): void;
+    notificationSubscription(): void;
     writingSubscription(): void;
     onSubscription(key: string, sub: Stomp.Subscription): void;
     checkMessageSubscription(idChat: string, callBack: ((message: Stomp.Message) => any)): void;

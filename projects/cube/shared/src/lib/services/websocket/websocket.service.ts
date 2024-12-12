@@ -23,6 +23,7 @@ export class WebSocketService implements OnDestroy {
     newChatMessage: Subject<string | undefined> = new Subject<string | undefined>();
     newStatus: Subject<propertiesDTO | undefined> = new Subject<propertiesDTO | undefined>();
     othersWriting: BehaviorSubject<{ [idChat: string]: string[] }> = new BehaviorSubject<{ [idChat: string]: string[] }>({});
+    newNotification: Subject<boolean> = new Subject<boolean>();
 
     constructor(
         private authService: AuthService,
@@ -46,6 +47,7 @@ export class WebSocketService implements OnDestroy {
             this.privateSubscription();
             this.statusSubscription();
             this.writingSubscription();
+            this.notificationSubscription();
         });
     }
 
@@ -102,6 +104,18 @@ export class WebSocketService implements OnDestroy {
                 `${WEBSOCKET_ENDPOINTS.STATUS_SUBSCRIPTION}.${this.keycloak.getKeycloakInstance().subject}`,
                 (newUserStatus) => {
                     this.newStatus.next(JSON.parse(newUserStatus.body));
+                }
+            )
+        );
+    }
+
+    notificationSubscription() {
+        this.onSubscription(
+            "Notification",
+            this.stompClient!.subscribe(
+                `${WEBSOCKET_ENDPOINTS.NOTIFICATION_SUBSCRIPTION}.${this.keycloak.getKeycloakInstance().subject}`,
+                () => {
+                    this.newNotification.next(true);
                 }
             )
         );

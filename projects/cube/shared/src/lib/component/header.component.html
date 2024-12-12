@@ -1,33 +1,18 @@
 <nav class="navbar navbar-expand-xl">
     <div class="container-fluid">
-
-        <!-- ## NAVBAR HOME TO PORTAL ## -->
         <div class="navbar-brand">
-            <a href="https://docmon.pccube.com/portal">
-                <img alt="cubePortalLogo" class="home" src="../../assets/images/pccube-solo-cubo.png"> 
-                <!-- mettere nella libreria -->
-            </a>
+            <img alt="cube portal logo" routerLink="/" style="cursor:pointer; width: 275px; height: 50px;"
+                src="assets/images/cube-portal-logo1.png">
         </div>
 
-        <!-- ## NAVBAR LOGO ## -->
-        <div class="navbar-brand">
-            <img alt="cubeChatLogo" routerLink="/" style="cursor:pointer;width: 275px; height: 50px;"
-                src="../../assets/images/pccube.png">
-        </div>
-
-        <!-- ## NAVBAR TOGGLER - QUANDO SCHERMO PICCOLO ## -->
         <button class="navbar-toggler shadow-none" (click)="isNavbarCollapsed = !isNavbarCollapsed">
             <span>
-                <img alt="navbarToggler" src="../../assets/images/navbar-toggler.png">
+                <img alt="navbar toggler" src="assets/images/navbar-toggler.png">
             </span>
         </button>
 
-        <!-- ## CORPO DELLA NAVBAR COLLASSABILE ## -->
         <div class="collapse navbar-collapse justify-content-end" [ngbCollapse]="isNavbarCollapsed">
-            <!-- ## LISTA DEGLI ELEMENTI DELLA NAVBAR ## -->
             <ul class="list-group list-group-horizontal align-items-center justify-content-center">
-
-                <!-- ## NOME E COGNOME UTENTE - SOLO TESTO ## -->
                 <li *ngIf="isNavbarCollapsed" class="list-group-item">
                     <div class="nav-link user-menu">
                         {{userDTO?.name}} {{userDTO?.surname}}
@@ -49,7 +34,6 @@
                     </div>
                 </li>
 
-                <!-- ## USER MENU ## -->
                 <li ngbDropdown class="list-group-item">
                     <button *ngIf="!userDTO" class="user-menu" (click)="login()">{{'Login'}}</button>
                     <div *ngIf="userDTO">
@@ -64,26 +48,74 @@
                     </div>
                 </li>
 
-                <!-- ## LANGUAGE SELECTOR ## -->
+                <!-- Notifications Menu - Only shown when showNotifications is true -->
+                <li *ngIf="showNotifications && userDTO" ngbDropdown [autoClose]="false"
+                    class="list-group-item dropdown">
+                    <div>
+                        <button alt="notification toggle" ngbDropdownToggle class="user-menu">
+                            <img height="32px" alt="notification toggle" src="assets/images/bell.png"
+                                (click)="updateNotifications()">
+                            <span *ngIf="notificationsCount!=0" class="badge">{{notificationsCount}}</span>
+                        </button>
+                        <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end">
+                            <li ngbDropdownItem class="">
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-10">
+                                        <button class="dropdown-item p-0"
+                                            routerLink="/notifications"><strong>{{"generic.notification-word"|translate}}</strong></button>
+                                    </div>
+                                    <div class="col-2">
+                                        <img style="cursor:pointer" height="16px" alt="read all notification"
+                                            src="assets/images/read-all.png" (click)="readAllNotifications()">
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li *ngFor="let notification of listNotifications" ngbDropdownItem>
+                                <div class="row">
+                                    <div [ngClass]="notification.read ? 'col-12' : 'col-10'" class="col">
+                                        <div *ngIf="!notification.read && ((notification.app!='Chat') || (notification.app=='Chat' && totalUnredMessagesCount!=0))"
+                                            class="notification-text notification-text-new"
+                                            (mouseenter)="readNotificationAfterMouseStand($event, notification.id)"
+                                            (mouseleave)="abortReadNotificationAfterMouseStand()"
+                                            (click)="redirect(notification)"
+                                            [ngClass]="notification.app == 'Chat' ? 'clickable' : null">
+                                            <h5 class="my-auto">{{notification.sentAt}}:</h5>
+                                            <span *ngIf="notification.app == 'Chat'">{{totalUnredMessagesCount}}</span>
+                                            {{notification.message | translate}}
+                                            <hr class="dropdown-divider">
+                                        </div>
+                                        <div *ngIf="notification.read && ((notification.app!='Chat') || (notification.app=='Chat' && totalUnredMessagesCount!=0))"
+                                            class="notification-text text-muted" (click)="redirect(notification)"
+                                            [ngClass]="notification.app == 'Chat' ? 'clickable' : null">
+                                            <h5 class="my-auto">{{notification.sentAt}}:</h5>
+                                            <span *ngIf="notification.app == 'Chat'">{{totalUnredMessagesCount}}</span>
+                                            {{notification.message | translate}}
+                                            <hr class="dropdown-divider">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!notification.read && ((notification.app!='Chat') || (notification.app=='Chat' && totalUnredMessagesCount!=0))"
+                                        class="col-2">
+                                        <img src="assets/images/envelope.png" alt="envelope icon">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li ngbDropdown class="list-group-item">
                     <button ngbDropdownToggle class="user-menu">
-                        <!--
-                            Aggiungere salvataggio a db e update
-                            <img src='assets/images/{{userDto?.propertiesDTO?.defaultLanguage}}.png'>
-                        -->
-                        <img alt="languageFlag" src='{{"lang.flag-picture" | translate}}'>
+                        <img alt="language flag" src='{{"lang.flag-picture"|translate}}'>
                     </button>
                     <div ngbDropdownMenu class="dropdown-menu">
                         <button *ngFor="let language of languages" ngbDropdownItem
                             (click)="changeLanguage(language.langIdentifier)">
-                            <img alt="flagLanguageDropdown" src='{{language.flagPath}}'>
+                            <img alt="language flag" src='{{language.flagPath}}'>
                         </button>
                     </div>
                 </li>
-
             </ul>
-
         </div>
-
     </div>
 </nav>

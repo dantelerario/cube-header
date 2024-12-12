@@ -10,4 +10,5 @@ export declare const WEBSOCKET_ENDPOINTS: {
     readonly STATUS_SUBSCRIPTION: "/status";
     readonly IS_WRITING_SUBSCRIPTION: "/is-writing";
     readonly CHECK_SUBSCRIPTION: "/check";
+    readonly NOTIFICATION_SUBSCRIPTION: "/notification";
 };
