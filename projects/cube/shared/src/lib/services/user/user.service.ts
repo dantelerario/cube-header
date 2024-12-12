@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable,Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PermissionDto,PaginatedUsersDTO,UserDTO } from '../../types/types';
-import { SharedConfig } from '../../shared.interface';
-import { USER_ENDPOINTS } from './user.constants';
+import { SharedConfig } from '../../types/shared.interface';
+import { USER_ENDPOINTS } from '../../types/user.constants';
 
 @Injectable({
     providedIn: 'root'

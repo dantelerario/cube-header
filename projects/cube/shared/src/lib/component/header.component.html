@@ -4,20 +4,21 @@
         <!-- ## NAVBAR HOME TO PORTAL ## -->
         <div class="navbar-brand">
             <a href="https://docmon.pccube.com/portal">
-                <img alt="cubePortalLogo" class="home" src="assets/images/pccube-solo-cubo.png">
+                <img alt="cubePortalLogo" class="home" src="../../assets/images/pccube-solo-cubo.png"> 
+                <!-- mettere nella libreria -->
             </a>
         </div>
 
         <!-- ## NAVBAR LOGO ## -->
         <div class="navbar-brand">
             <img alt="cubeChatLogo" routerLink="/" style="cursor:pointer;width: 275px; height: 50px;"
-                src="assets/images/pccube.png">
+                src="../../assets/images/pccube.png">
         </div>
 
         <!-- ## NAVBAR TOGGLER - QUANDO SCHERMO PICCOLO ## -->
         <button class="navbar-toggler shadow-none" (click)="isNavbarCollapsed = !isNavbarCollapsed">
             <span>
-                <img alt="navbarToggler" src="assets/images/navbar-toggler.png">
+                <img alt="navbarToggler" src="../../assets/images/navbar-toggler.png">
             </span>
         </button>
 
@@ -36,7 +37,7 @@
                 <li *ngIf="userDTO" ngbDropdown class="list-group-item">
                     <div ngbDropdown class="dropdown">
                         <button ngbDropdownToggle class="user-menu">
-                            <img alt="user status" src="assets/images/{{ userDTO!.propertiesDTO!.status }}.png" />
+                            <img alt="user status" src="../../assets/images/{{ userDTO!.propertiesDTO!.status }}.png" />
                         </button>
                         <div ngbDropdownMenu>
                             <button *ngFor="let status of stati" class="btn" ngbDropdownItem

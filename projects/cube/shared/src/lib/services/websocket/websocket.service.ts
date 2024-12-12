@@ -6,8 +6,8 @@ import { IsWritingDto,MessageTriggerDTO,propertiesDTO } from '../../types/types'
 import * as Stomp from 'stompjs';
 import * as SockJs from 'sockjs-client';
 import { BehaviorSubject,Subject } from 'rxjs';
-import { SharedConfig } from '../../shared.interface';
-import { WEBSOCKET_ENDPOINTS } from './websocket.constants';
+import { SharedConfig } from '../../types/shared.interface';
+import { WEBSOCKET_ENDPOINTS } from '../../types/websocket.constants';
 
 @Injectable({
     providedIn: 'root'

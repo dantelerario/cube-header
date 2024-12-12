@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakLoginOptions } from 'keycloak-js';
-import { SharedConfig } from '../shared.interface';
+import { SharedConfig } from '../types/shared.interface';
 import { AuthService } from '../services/auth/auth.service';
 import { UserService } from '../services/user/user.service';
 import { WebSocketService } from '../services/websocket/websocket.service';

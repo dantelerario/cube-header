@@ -8,7 +8,7 @@ import { HeaderComponent } from './component/header.component';
 import { AuthService } from './services/auth/auth.service';
 import { UserService } from './services/user/user.service';
 import { WebSocketService } from './services/websocket/websocket.service';
-import { SharedConfig } from './shared.interface';
+import { SharedConfig } from './types/shared.interface';
 
 @NgModule({
   declarations: [HeaderComponent],

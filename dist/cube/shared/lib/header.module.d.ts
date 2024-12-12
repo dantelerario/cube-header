@@ -1,5 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
-import { SharedConfig } from './shared.interface';
+import { SharedConfig } from './types/shared.interface';
 import * as i0 from "@angular/core";
 import * as i1 from "./component/header.component";
 import * as i2 from "@angular/common";

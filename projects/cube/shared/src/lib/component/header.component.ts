@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { faCube } from '@fortawesome/free-solid-svg-icons';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakLoginOptions } from 'keycloak-js';
-import { SharedConfig } from '../shared.interface';
+import { SharedConfig } from '../types/shared.interface';
 import { AuthService } from '../services/auth/auth.service';
 import { UserService } from '../services/user/user.service';
 import { WebSocketService } from '../services/websocket/websocket.service';
@@ -53,31 +53,20 @@ export class HeaderComponent implements OnInit {
       {
         name: 'English',
         langIdentifier: 'en-EN',
-        flagPath: 'assets/images/en-EN.png',
+        flagPath: '../../assets/images/en-EN.png',
       },
       {
         name: 'Italiano',
         langIdentifier: 'it-IT',
-        flagPath: 'assets/images/it-IT.png',
+        flagPath: '../../assets/images/it-IT.png',
       },
       {
         name: 'Français',
         langIdentifier: 'fr-FR',
-        flagPath: 'assets/images/fr-FR.png',
+        flagPath: '../../assets/images/fr-FR.png',
       }
     ].sort();
   }
-
-  // ngOnInit(): void {
-  //   this.auth.userDTOBehaviorSubject.subscribe({
-  //     next: (receivedUserDTO: any) => {
-  //       this.userDTO = receivedUserDTO;
-  //       if (this.userDTO?.propertiesDTO?.defaultLanguage) {
-  //         this.translateService.use(this.userDTO.propertiesDTO.defaultLanguage);
-  //       }
-  //     },
-  //   });
-  // }
 
   ngOnInit(): void {
     this.keycloak.isLoggedIn().then(isLoggedIn => {

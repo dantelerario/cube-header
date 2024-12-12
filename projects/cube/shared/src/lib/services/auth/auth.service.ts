@@ -4,7 +4,7 @@ import { KeycloakProfile } from 'keycloak-js';
 import { BehaviorSubject,catchError,filter,of,switchMap } from 'rxjs';
 import { UserDTO } from '../../types/types';
 import { UserService } from '../user/user.service';
-import { SharedConfig } from '../../shared.interface';
+import { SharedConfig } from '../../types/shared.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -18,30 +18,11 @@ export class AuthService {
     userDTOBehaviorSubject = new BehaviorSubject<UserDTO | undefined>(undefined);
     userKeycloakBehaviorSubject = new BehaviorSubject<KeycloakProfile | undefined>(undefined);
 
-    // constructor(
-    //     private http: HttpClient,
-    //     private userService: UserService,
-    //     @Inject('SHARED_CONFIG') private config: SharedConfig
-    // ) {
-    //     // Sottoscrizione per gestire gli aggiornamenti del profilo Keycloak
-    //     this.userKeycloakBehaviorSubject.pipe(
-    //         filter(userKeycloak => !!userKeycloak),
-    //         switchMap(userKeycloak =>
-    //             userService.save().pipe(
-    //                 switchMap(() => userService.getUser(userKeycloak!.id!))
-    //             )
-    //         )
-    //     ).subscribe(userDTO => {
-    //         this.userDTO = userDTO;
-    //         this.userDTOBehaviorSubject.next(userDTO);
-    //     });
-    // }
     constructor(
         private http: HttpClient,
         private userService: UserService,
         @Inject('SHARED_CONFIG') private config: SharedConfig
     ) {
-        // Add error handling and proper sequencing
         this.userKeycloakBehaviorSubject.pipe(
             filter(userKeycloak => !!userKeycloak?.id),
             switchMap(userKeycloak => userService.save().pipe(

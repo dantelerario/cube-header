@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PermissionDto, PaginatedUsersDTO, UserDTO } from '../../types/types';
-import { SharedConfig } from '../../shared.interface';
+import { SharedConfig } from '../../types/shared.interface';
 import * as i0 from "@angular/core";
 export declare class UserService {
     private http;

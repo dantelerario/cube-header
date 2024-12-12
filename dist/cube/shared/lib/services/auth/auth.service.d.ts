@@ -3,7 +3,7 @@ import { KeycloakProfile } from 'keycloak-js';
 import { BehaviorSubject } from 'rxjs';
 import { UserDTO } from '../../types/types';
 import { UserService } from '../user/user.service';
-import { SharedConfig } from '../../shared.interface';
+import { SharedConfig } from '../../types/shared.interface';
 import * as i0 from "@angular/core";
 export declare class AuthService {
     private http;
