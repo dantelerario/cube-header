@@ -2,12 +2,12 @@
     <div class="container-fluid">
         <div class="navbar-brand">
             <img alt="cube portal logo" routerLink="/" style="cursor:pointer; width: 275px; height: 50px;"
-                src="assets/images/cube-portal-logo1.png">
+                src="../../assets/images/cube-portal-logo1.png">
         </div>
 
         <button class="navbar-toggler shadow-none" (click)="isNavbarCollapsed = !isNavbarCollapsed">
             <span>
-                <img alt="navbar toggler" src="assets/images/navbar-toggler.png">
+                <img alt="navbar toggler" src="../../assets/images/navbar-toggler.png">
             </span>
         </button>
 
@@ -48,12 +48,20 @@
                     </div>
                 </li>
 
+                <li *ngIf="!showNotifications" ngbDropdown [autoClose]="false" class="list-group-item dropdown">
+                    showfalse
+                </li>
+
+                <li *ngIf="showNotifications" ngbDropdown [autoClose]="false" class="list-group-item dropdown">
+                    showtrue
+                </li>
+
                 <!-- Notifications Menu - Only shown when showNotifications is true -->
                 <li *ngIf="showNotifications" ngbDropdown [autoClose]="false"
                     class="list-group-item dropdown">
                     <div>
                         <button alt="notification toggle" ngbDropdownToggle class="user-menu">
-                            <img height="32px" alt="notification toggle" src="assets/images/bell.png"
+                            <img height="32px" alt="notification toggle" src="../../assets/images/bell.png"
                                 (click)="updateNotifications()">
                             <span *ngIf="notificationsCount!=0" class="badge">{{notificationsCount}}</span>
                         </button>
@@ -66,7 +74,7 @@
                                     </div>
                                     <div class="col-2">
                                         <img style="cursor:pointer" height="16px" alt="read all notification"
-                                            src="assets/images/read-all.png" (click)="readAllNotifications()">
+                                            src="../../assets/images/read-all.png" (click)="readAllNotifications()">
                                     </div>
                                 </div>
                             </li>
@@ -96,7 +104,7 @@
                                     </div>
                                     <div *ngIf="!notification.read && ((notification.app!='Chat') || (notification.app=='Chat' && totalUnredMessagesCount!=0))"
                                         class="col-2">
-                                        <img src="assets/images/envelope.png" alt="envelope icon">
+                                        <img src="../../assets/images/envelope.png" alt="envelope icon">
                                     </div>
                                 </div>
                             </li>
