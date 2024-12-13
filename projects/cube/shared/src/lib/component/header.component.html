@@ -3,7 +3,6 @@
         <div class="navbar-brand">
             <img alt="cube portal logo" routerLink="/" style="cursor:pointer; width: 275px; height: 50px;"
                 src="../../assets/images/cube-portal-logo1.png">
-                <p>teeeeeeeeeeeeeeeeeestttttttttttttttt</p>
         </div>
 
         <button class="navbar-toggler shadow-none" (click)="isNavbarCollapsed = !isNavbarCollapsed">
@@ -47,14 +46,6 @@
                             <button ngbDropdownItem (click)="logout()">{{'Logout'}}</button>
                         </div>
                     </div>
-                </li>
-
-                <li *ngIf="!showNotifications" ngbDropdown [autoClose]="false" class="list-group-item dropdown">
-                    showfalse
-                </li>
-
-                <li *ngIf="showNotifications" ngbDropdown [autoClose]="false" class="list-group-item dropdown">
-                    showtrue
                 </li>
 
                 <!-- Notifications Menu - Only shown when showNotifications is true -->
