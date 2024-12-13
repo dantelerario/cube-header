@@ -316,7 +316,7 @@ class HeaderComponent {
         this.userService = userService;
         this.notificationService = notificationService;
         this.config = config;
-        this.showNotifications = false;
+        this.showNotifications = true;
         this.imgSrc = 'assets/images/profile.jpg';
         this.icon = faCube;
         this.languages = [];

@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit,OnDestroy {
   @Input() properties: any;
-  @Input() showNotifications: boolean = false;
+  @Input() showNotifications: boolean = true;
 
   userDTO?: UserDTO;
   imgSrc?: string = 'assets/images/profile.jpg';
