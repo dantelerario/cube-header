@@ -2,18 +2,18 @@
     <div class="container-fluid">
         <div class="navbar-brand">
             <a href="https://docmon.pccube.com/portal">
-                <img alt="cubePortalLogo" class="home" src="@cube/shared/projects/cube/shared/src/assets/images/pccube-solo-cubo.png">
+                <img alt="cubePortalLogo" class="home" src="assets/images/pccube-solo-cubo.png">
             </a>
         </div>
 
         <div class="navbar-brand">
             <img alt="cube portal logo" routerLink="/" style="cursor:pointer; width: 275px; height: 50px;"
-                src="@cube/shared/projects/cube/shared/src/assets/images/cube-portal-logo1.png">
+                src="assets/images/cube-portal-logo1.png">
         </div>
 
         <button class="navbar-toggler shadow-none" (click)="isNavbarCollapsed = !isNavbarCollapsed">
             <span>
-                <img alt="navbar toggler" src="@cube/shared/projects/cube/shared/src/assets/images/navbar-toggler.png">
+                <img alt="navbar toggler" src="assets/images/navbar-toggler.png">
             </span>
         </button>
 
@@ -28,7 +28,7 @@
                 <li *ngIf="userDTO" ngbDropdown class="list-group-item">
                     <div ngbDropdown class="dropdown">
                         <button ngbDropdownToggle class="user-menu">
-                            <img alt="user status" src="@cube/shared/projects/cube/shared/src/assets/images/{{ userDTO!.propertiesDTO!.status }}.png" />
+                            <img alt="user status" src="assets/images/{{ userDTO!.propertiesDTO!.status }}.png" />
                         </button>
                         <div ngbDropdownMenu>
                             <button *ngFor="let status of stati" class="btn" ngbDropdownItem
@@ -58,7 +58,7 @@
                 <li *ngIf="showNotifications" ngbDropdown [autoClose]="false" class="list-group-item dropdown">
                     <div>
                         <button alt="notification toggle" ngbDropdownToggle class="user-menu">
-                            <img height="32px" alt="notification toggle" src="@cube/shared/projects/cube/shared/src/assets/images/bell.png"
+                            <img height="32px" alt="notification toggle" src="assets/images/bell.png"
                                 (click)="updateNotifications()">
                             <span *ngIf="notificationsCount!=0" class="badge">{{notificationsCount}}</span>
                         </button>
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="col-2">
                                         <img style="cursor:pointer" height="16px" alt="read all notification"
-                                            src="@cube/shared/projects/cube/shared/src/assets/images/read-all.png" (click)="readAllNotifications()">
+                                            src="assets/images/read-all.png" (click)="readAllNotifications()">
                                     </div>
                                 </div>
                             </li>
@@ -101,7 +101,7 @@
                                     </div>
                                     <div *ngIf="!notification.read && ((notification.app!='Chat') || (notification.app=='Chat' && totalUnredMessagesCount!=0))"
                                         class="col-2">
-                                        <img src="@cube/shared/projects/cube/shared/src/assets/images/envelope.png" alt="envelope icon">
+                                        <img src="assets/images/envelope.png" alt="envelope icon">
                                     </div>
                                 </div>
                             </li>
