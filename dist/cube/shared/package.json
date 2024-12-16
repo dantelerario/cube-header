@@ -8,6 +8,9 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
+  "assets": [
+    "assets/**/*"
+  ],
   "sideEffects": false,
   "module": "fesm2022/cube-shared.mjs",
   "typings": "index.d.ts",
