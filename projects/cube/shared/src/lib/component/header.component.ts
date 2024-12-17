@@ -11,6 +11,7 @@ import { Language,Status,UserDTO,Notification as CustomNotification } from '../t
 import { NotificationService } from '../services/notification/notification.service';
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { IMAGES } from '../constants/image-constants';
 
 @Component({
   selector: 'cube-header',
@@ -20,6 +21,8 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit,OnDestroy {
   @Input() properties: any;
   @Input() showNotifications: boolean = false;
+
+  images = IMAGES;
 
   userDTO?: UserDTO;
   imgSrc?: string = 'assets/images/profile.jpg';

@@ -19,6 +19,21 @@ export declare class HeaderComponent implements OnInit, OnDestroy {
     private config;
     properties: any;
     showNotifications: boolean;
+    images: {
+        BELL: string;
+        BUSY: string;
+        CUBE_PORTAL_LOGO1: string;
+        EN_EN: string;
+        ENVELOPE: string;
+        FR_FR: string;
+        INVISIBLE: string;
+        IT_IT: string;
+        NAVBAR_TOGGLER: string;
+        ONLINE: string;
+        PCCUBE_SOLO_CUBO: string;
+        PCCUBE: string;
+        READ_ALL: string;
+    };
     userDTO?: UserDTO;
     imgSrc?: string;
     icon: import("@fortawesome/fontawesome-common-types").IconDefinition;

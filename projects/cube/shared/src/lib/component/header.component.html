@@ -58,8 +58,7 @@
                 <li *ngIf="showNotifications" ngbDropdown [autoClose]="false" class="list-group-item dropdown">
                     <div>
                         <button alt="notification toggle" ngbDropdownToggle class="user-menu">
-                            <img height="32px" alt="notification toggle" src="assets/images/bell.png"
-                                (click)="updateNotifications()">
+                            <img height="32px" alt="notification toggle" [src]="images.BELL" (click)="updateNotifications()">
                             <span *ngIf="notificationsCount!=0" class="badge">{{notificationsCount}}</span>
                         </button>
                         <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end">
