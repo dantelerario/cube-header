@@ -40,15 +40,15 @@ export class HeaderComponent implements OnInit,OnDestroy {
   stati: Status[] = [
     {
       name: 'online',
-      iconPath: 'assets/images/ONLINE.png',
+      iconPath: this.images.ONLINE
     },
     {
       name: 'busy',
-      iconPath: 'assets/images/BUSY.png',
+      iconPath: this.images.BUSY
     },
     {
       name: 'invisible',
-      iconPath: 'assets/images/INVISIBLE.png',
+      iconPath: this.images.INVISIBLE
     },
   ];
 
@@ -69,17 +69,17 @@ export class HeaderComponent implements OnInit,OnDestroy {
       {
         name: 'English',
         langIdentifier: 'en-EN',
-        flagPath: '../../assets/images/en-EN.png',
+        flagPath: this.images.EN_EN,
       },
       {
         name: 'Italiano',
         langIdentifier: 'it-IT',
-        flagPath: '../../assets/images/it-IT.png',
+        flagPath: this.images.IT_IT,
       },
       {
         name: 'Français',
         langIdentifier: 'fr-FR',
-        flagPath: '../../assets/images/fr-FR.png',
+        flagPath: this.images.FR_FR,
       }
     ].sort();
   }

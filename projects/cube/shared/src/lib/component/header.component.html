@@ -2,18 +2,18 @@
     <div class="container-fluid">
         <div class="navbar-brand">
             <a href="https://docmon.pccube.com/portal">
-                <img alt="cubePortalLogo" class="home" src="assets/images/pccube-solo-cubo.png">
+                <img alt="cubePortalLogo" class="home" [src]="images.PCCUBE_SOLO_CUBO">
             </a>
         </div>
 
         <div class="navbar-brand">
             <img alt="cube portal logo" routerLink="/" style="cursor:pointer; width: 275px; height: 50px;"
-                src="assets/images/cube-portal-logo1.png">
+                [src]="images.CUBE_PORTAL_LOGO1">
         </div>
 
         <button class="navbar-toggler shadow-none" (click)="isNavbarCollapsed = !isNavbarCollapsed">
             <span>
-                <img alt="navbar toggler" src="assets/images/navbar-toggler.png">
+                <img alt="navbar toggler" [src]="images.NAVBAR_TOGGLER">
             </span>
         </button>
 
@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="col-2">
                                         <img style="cursor:pointer" height="16px" alt="read all notification"
-                                            src="assets/images/read-all.png" (click)="readAllNotifications()">
+                                            [src]="images.READ_ALL" (click)="readAllNotifications()">
                                     </div>
                                 </div>
                             </li>
@@ -100,7 +100,7 @@
                                     </div>
                                     <div *ngIf="!notification.read && ((notification.app!='Chat') || (notification.app=='Chat' && totalUnredMessagesCount!=0))"
                                         class="col-2">
-                                        <img src="assets/images/envelope.png" alt="envelope icon">
+                                        <img [src]="images.ENVELOPE" alt="envelope icon">
                                     </div>
                                 </div>
                             </li>
