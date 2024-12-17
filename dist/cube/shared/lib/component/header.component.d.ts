@@ -19,6 +19,16 @@ export declare class HeaderComponent implements OnInit, OnDestroy {
     private config;
     properties: any;
     showNotifications: boolean;
+    /**
+     * va passato il path dell'immagine nel selector del component padre
+     * per es.
+     * <cube-header
+     * cubeLogo="assets/images/your-cube-logo.png"
+     * portalLogo="assets/images/your-portal-logo.png">
+     * </cube-header>
+    */
+    iconLogo: string;
+    bigLogo: string;
     images: {
         BELL: string;
         BUSY: string;
@@ -63,5 +73,5 @@ export declare class HeaderComponent implements OnInit, OnDestroy {
     changeLanguage(lang: string): void;
     updateStatus(status: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<HeaderComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<HeaderComponent, "cube-header", never, { "properties": { "alias": "properties"; "required": false; }; "showNotifications": { "alias": "showNotifications"; "required": false; }; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<HeaderComponent, "cube-header", never, { "properties": { "alias": "properties"; "required": false; }; "showNotifications": { "alias": "showNotifications"; "required": false; }; "iconLogo": { "alias": "iconLogo"; "required": false; }; "bigLogo": { "alias": "bigLogo"; "required": false; }; }, {}, never, never, false, never>;
 }

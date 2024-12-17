@@ -21,6 +21,19 @@ import { IMAGES } from '../constants/image-constants';
 export class HeaderComponent implements OnInit,OnDestroy {
   @Input() properties: any;
   @Input() showNotifications: boolean = false;
+  //valori di default per i loghi
+  /**
+   * va passato il path dell'immagine nel selector del component padre
+   * per es.
+   * <cube-header  
+   * cubeLogo="assets/images/your-cube-logo.png"
+   * portalLogo="assets/images/your-portal-logo.png">
+   * </cube-header>
+  */
+  @Input() iconLogo: string = 'assets/images/pccube-solo-cubo.png'; // valore di default
+  @Input() bigLogo: string = 'assets/images/cube-portal-logo1.png'; // valore di default
+
+
 
   images = IMAGES;
 

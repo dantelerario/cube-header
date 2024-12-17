@@ -6,6 +6,13 @@ const PROJECT_ROOT: string = process.cwd();
 const IMAGE_DIR: string = path.join(PROJECT_ROOT,'projects','cube','shared','src','assets','images');
 const OUTPUT_FILE: string = path.join(PROJECT_ROOT,'projects','cube','shared','src','lib','constants','image-constants.ts');
 
+
+/***
+ * npm run generate-images
+ * questo comando fa partire lo script che genere in base64 le immagini nel file delle constants image-constants.ts, 
+ * prima di lanciarlo in console, cancellare il file delle immagini in base64 ed assicurarsi che in assets\images ci siano
+ * tutte le immagini da convertire.
+ */
 function generateImageConstants(): void {
     try {
         if (!fs.existsSync(IMAGE_DIR)) {
