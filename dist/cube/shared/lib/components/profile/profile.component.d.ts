@@ -1,0 +1,42 @@
+import { OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
+import { AlertMessage, Language, Status } from '../../types/types';
+import { UserService } from '../../services/user/user.service';
+import { UserDTO } from '../../types/types';
+import * as i0 from "@angular/core";
+export declare class ProfileComponent implements OnInit {
+    private auth;
+    private userService;
+    private translateService;
+    userDto?: UserDTO;
+    applications?: string[];
+    images: {
+        BELL: string;
+        BUSY: string;
+        CUBE_PORTAL_LOGO1: string;
+        EN_EN: string;
+        ENVELOPE: string;
+        FR_FR: string;
+        INVISIBLE: string;
+        IT_IT: string;
+        NAVBAR_TOGGLER: string;
+        ONLINE: string;
+        PCCUBE_SOLO_CUBO: string;
+        PCCUBE: string;
+        READ_ALL: string;
+    };
+    stati: Status[];
+    languages: Language[];
+    errorMsg?: AlertMessage | undefined;
+    warningMsg?: AlertMessage | undefined;
+    successMsg?: AlertMessage | undefined;
+    constructor(auth: AuthService, userService: UserService, translateService: TranslateService);
+    ngOnInit(): void;
+    uploadImage(input: any): void;
+    updateItemPerPage(itemPerPage: string): void;
+    updateLanguage(lang: string): void;
+    updateStatus(status: string): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ProfileComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<ProfileComponent, "cube-profile", never, {}, {}, never, ["cube-header", "[messages]", "[footer]"], false, never>;
+}

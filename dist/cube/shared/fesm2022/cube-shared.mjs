@@ -15,6 +15,8 @@ import * as i8 from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import * as i9 from '@angular/router';
 import { RouterModule } from '@angular/router';
+import * as i7$1 from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // File generato automaticamente
@@ -542,6 +544,130 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
                 type: Input
             }] } });
 
+class ProfileComponent {
+    constructor(auth, userService, translateService) {
+        this.auth = auth;
+        this.userService = userService;
+        this.translateService = translateService;
+        this.applications = [];
+        this.images = IMAGES;
+        this.stati = [
+            {
+                name: 'online',
+                iconPath: this.images.ONLINE
+            },
+            {
+                name: 'busy',
+                iconPath: this.images.BUSY
+            },
+            {
+                name: 'invisible',
+                iconPath: this.images.INVISIBLE
+            },
+        ];
+        // Define an array of Language objects
+        this.languages = [
+            {
+                name: 'English',
+                langIdentifier: 'en-EN',
+                flagPath: this.images.EN_EN,
+            },
+            {
+                name: 'Italiano',
+                langIdentifier: 'it-IT',
+                flagPath: this.images.IT_IT,
+            },
+            {
+                name: 'Français',
+                langIdentifier: 'fr-FR',
+                flagPath: this.images.FR_FR,
+            },
+        ];
+        // Subscribe to the userDTOBehaviorSubject from the AuthService
+        auth.userDTOBehaviorSubject?.subscribe({
+            next: (userDto) => (this.userDto = userDto),
+        });
+    }
+    ngOnInit() { }
+    // Define a function for uploading an image
+    uploadImage(input) {
+        const file = input.target.files[0];
+        if (file.size > 16494) {
+            this.errorMsg = { message: "message.error.imageSize" };
+            return;
+        }
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const result = reader.result;
+            if (result) {
+                this.userService.updateProfilePic(result.toString()).subscribe({
+                    next: () => {
+                        if (this.userDto?.propertiesDTO) {
+                            this.userDto.propertiesDTO.profilePicture = result.toString();
+                            this.successMsg = { message: "message.success.image" };
+                            this.auth.userDTOBehaviorSubject.next(this.userDto);
+                        }
+                    },
+                    error: (error) => {
+                        this.errorMsg = { message: error.error.message, params: JSON.stringify(Object.assign({}, error.error.parameter)) };
+                    }
+                });
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+    updateItemPerPage(itemPerPage) {
+        if (itemPerPage != '') {
+            this.userService.updateItemPerPage(itemPerPage).subscribe({
+                next: (response) => {
+                    if (response && this.userDto?.propertiesDTO) {
+                        this.userDto.propertiesDTO.itemPage = itemPerPage;
+                        this.successMsg = { message: "message.success.item" };
+                        this.auth.userDTOBehaviorSubject.next(this.userDto);
+                    }
+                },
+                error: (error) => {
+                    this.errorMsg = { message: error.error.message, params: JSON.stringify(Object.assign({}, error.error.parameter)) };
+                }
+            });
+        }
+    }
+    updateLanguage(lang) {
+        this.translateService.use(lang);
+        this.userService.updateLanguage(lang).subscribe({
+            next: () => {
+                if (this.userDto?.propertiesDTO) {
+                    this.successMsg = { message: "message.success.language" };
+                    this.userDto.propertiesDTO.defaultLanguage = lang;
+                }
+            },
+            error: (error) => {
+                this.errorMsg = { message: error.error.message, params: JSON.stringify(Object.assign({}, error.error.parameter)) };
+            }
+        });
+    }
+    updateStatus(status) {
+        this.userService.updateStatus(status).subscribe({
+            next: (response) => {
+                if (response && this.userDto?.propertiesDTO) {
+                    this.userDto.propertiesDTO.status = status;
+                    this.successMsg = { message: "message.success.status" };
+                    this.auth.userDTOBehaviorSubject.next(this.userDto);
+                }
+            },
+            error: (error) => {
+                this.errorMsg = { message: error.error.message, params: JSON.stringify(Object.assign({}, error.error.parameter)) };
+            }
+        });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ProfileComponent, deps: [{ token: AuthService }, { token: UserService }, { token: i2$1.TranslateService }], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "16.2.12", type: ProfileComponent, selector: "cube-profile", ngImport: i0, template: "<!-- header -->\r\n<ng-content select=\"cube-header\"></ng-content>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n    <div class=\"row row-fluid\">\r\n        <div class=\"col-12\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a routerLink=\"/\">{{'Home'}}</a></li>\r\n                <li class=\"breadcrumb-item active\">{{\"Profile\" | translate}}</li>\r\n            </ol>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<main class=\"container-fluid text-center fs-6\">\r\n    <!-- Sezione immagine profilo -->\r\n    <div class=\"row row-fluid justify-content-center\">\r\n        <ng-content select=\"[messages]\"></ng-content>\r\n        <div class=\"col-12 col-xl-3\">\r\n            <img alt=\"profilePicture\" class=\"mb-2 profile\" [src]=\"userDto?.propertiesDTO?.profilePicture\" width=\"175\"\r\n                height=\"175\">\r\n            <form>\r\n                <label for=\"uploadImage\" class=\"mb-1\">{{\"generic.update-propic\" | translate}}</label>\r\n                <label class=\"btn rounded-5\">\r\n                    {{\"generic.select-file\" | translate}}\r\n                    <input style=\"display: none;\" name=\"uploadImage\" id=\"uploadImage\" class=\"rounded-5\" type=\"file\"\r\n                        (change)=\"uploadImage($event)\">\r\n                </label>\r\n            </form>\r\n        </div>\r\n\r\n        <!-- Sezione informazioni utente -->\r\n        <div class=\"col-12 col-md-12 col-xl-4\">\r\n            <div class=\"row g-4\">\r\n                <div class=\"col-12\">\r\n                    {{\"generic.name\"|translate}}: {{userDto?.name}}\r\n                </div>\r\n                <div class=\"col-12\">\r\n                    {{\"generic.surname\"|translate}}: {{userDto?.surname}}\r\n                </div>\r\n                <div class=\"col-12\">\r\n                    E-mail: {{userDto?.email}}\r\n                    <span class=\"ms-2\" *ngIf=\"userDto?.validate\">\r\n                        <img class=\"default-image\" src=\"assets/images/verified.png\" alt=\"\">\r\n                    </span>\r\n                </div>\r\n                <div class=\"col-12 mt-2\">\r\n                    <!-- Dropdown per selezionare il numero di elementi visualizzati per pagina -->\r\n                    <div class=\"d-flex justify-content-center align-items-center\">\r\n                        {{\"generic.items\"|translate}}\r\n                        <label for=\"updateItemPerPage\"></label>\r\n                        <select id=\"updateItemPerPage\" #itemPerPage class=\"form-select shadow-none ms-2\"\r\n                            (change)=\"updateItemPerPage(itemPerPage.value)\">\r\n                            <option default hidden>{{userDto?.propertiesDTO?.itemPage}}</option>\r\n                            <option>{{'5'}}</option>\r\n                            <option>{{'20'}}</option>\r\n                            <option>{{'50'}}</option>\r\n                        </select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-12 mt-2\">\r\n                    <!-- Dropdown per selezionare la lingua di visualizzazione della pagina -->\r\n                    <div ngbDropdown class=\"dropdown\">\r\n                        <button ngbDropdownToggle class=\"btn\">\r\n                            <img alt=\"language flag\"\r\n                                src='assets/images/{{userDto?.propertiesDTO?.defaultLanguage}}.png'>\r\n                        </button>\r\n                        <div ngbDropdownMenu>\r\n                            <button *ngFor=\"let language of languages\" class=\"btn\" ngbDropdownItem\r\n                                (click)=\"updateLanguage(language.langIdentifier)\">\r\n                                <img alt=\"flagLanguageDropdown\" src='{{language.flagPath}}'>\r\n                            </button>\r\n                        </div>\r\n                        {{ \"lang.def-lang\" | translate }}\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-12 mt-2\">\r\n                    <!-- Dropdown per selezionare il nuovo status -->\r\n                    <div ngbDropdown class=\"dropdown\">\r\n                        <button ngbDropdownToggle class=\"btn\">\r\n                            <img alt=\"user status\" src=\"assets/images/{{ userDto?.propertiesDTO?.status }}.png\" />\r\n                        </button>\r\n                        <div ngbDropdownMenu>\r\n                            <button *ngFor=\"let status of stati\" class=\"btn\" ngbDropdownItem\r\n                                (click)=\"updateStatus(status.name)\">\r\n                                <img alt=\"{{status.name}}\" src=\"{{ status.iconPath }}\" />\r\n                                <span>{{\"generic.\"+status.name | translate}}</span>\r\n                            </button>\r\n                        </div>\r\n                        {{ \"generic.status\" | translate }}\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n<!-- footer -->\r\n<ng-content select=\"[footer]\"></ng-content>", styles: [".row{margin:1.125rem 1.25rem 0rem}select{max-width:5rem}.dropdown-menu{border-radius:.625rem;min-width:inherit;padding:.25rem}button:hover{background-color:transparent}.profile{object-fit:cover}.rounded-5{max-width:10rem;position:relative;left:50%;transform:translate(-50%);display:block;background-color:#130044;color:#fff}\n"], dependencies: [{ kind: "directive", type: i7.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i7.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i8.NgbDropdown, selector: "[ngbDropdown]", inputs: ["autoClose", "dropdownClass", "open", "placement", "popperOptions", "container", "display"], outputs: ["openChange"], exportAs: ["ngbDropdown"] }, { kind: "directive", type: i8.NgbDropdownToggle, selector: "[ngbDropdownToggle]" }, { kind: "directive", type: i8.NgbDropdownMenu, selector: "[ngbDropdownMenu]" }, { kind: "directive", type: i8.NgbDropdownItem, selector: "[ngbDropdownItem]", inputs: ["disabled"] }, { kind: "directive", type: i9.RouterLink, selector: "[routerLink]", inputs: ["target", "queryParams", "fragment", "queryParamsHandling", "state", "relativeTo", "preserveFragment", "skipLocationChange", "replaceUrl", "routerLink"] }, { kind: "directive", type: i7$1.ɵNgNoValidate, selector: "form:not([ngNoForm]):not([ngNativeValidate])" }, { kind: "directive", type: i7$1.NgSelectOption, selector: "option", inputs: ["ngValue", "value"] }, { kind: "directive", type: i7$1.ɵNgSelectMultipleOption, selector: "option", inputs: ["ngValue", "value"] }, { kind: "directive", type: i7$1.NgControlStatusGroup, selector: "[formGroupName],[formArrayName],[ngModelGroup],[formGroup],form:not([ngNoForm]),[ngForm]" }, { kind: "directive", type: i7$1.NgForm, selector: "form:not([ngNoForm]):not([formGroup]),ng-form,[ngForm]", inputs: ["ngFormOptions"], outputs: ["ngSubmit"], exportAs: ["ngForm"] }, { kind: "pipe", type: i2$1.TranslatePipe, name: "translate" }] }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: ProfileComponent, decorators: [{
+            type: Component,
+            args: [{ selector: 'cube-profile', template: "<!-- header -->\r\n<ng-content select=\"cube-header\"></ng-content>\r\n\r\n\r\n<div class=\"container-fluid\">\r\n    <div class=\"row row-fluid\">\r\n        <div class=\"col-12\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a routerLink=\"/\">{{'Home'}}</a></li>\r\n                <li class=\"breadcrumb-item active\">{{\"Profile\" | translate}}</li>\r\n            </ol>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<main class=\"container-fluid text-center fs-6\">\r\n    <!-- Sezione immagine profilo -->\r\n    <div class=\"row row-fluid justify-content-center\">\r\n        <ng-content select=\"[messages]\"></ng-content>\r\n        <div class=\"col-12 col-xl-3\">\r\n            <img alt=\"profilePicture\" class=\"mb-2 profile\" [src]=\"userDto?.propertiesDTO?.profilePicture\" width=\"175\"\r\n                height=\"175\">\r\n            <form>\r\n                <label for=\"uploadImage\" class=\"mb-1\">{{\"generic.update-propic\" | translate}}</label>\r\n                <label class=\"btn rounded-5\">\r\n                    {{\"generic.select-file\" | translate}}\r\n                    <input style=\"display: none;\" name=\"uploadImage\" id=\"uploadImage\" class=\"rounded-5\" type=\"file\"\r\n                        (change)=\"uploadImage($event)\">\r\n                </label>\r\n            </form>\r\n        </div>\r\n\r\n        <!-- Sezione informazioni utente -->\r\n        <div class=\"col-12 col-md-12 col-xl-4\">\r\n            <div class=\"row g-4\">\r\n                <div class=\"col-12\">\r\n                    {{\"generic.name\"|translate}}: {{userDto?.name}}\r\n                </div>\r\n                <div class=\"col-12\">\r\n                    {{\"generic.surname\"|translate}}: {{userDto?.surname}}\r\n                </div>\r\n                <div class=\"col-12\">\r\n                    E-mail: {{userDto?.email}}\r\n                    <span class=\"ms-2\" *ngIf=\"userDto?.validate\">\r\n                        <img class=\"default-image\" src=\"assets/images/verified.png\" alt=\"\">\r\n                    </span>\r\n                </div>\r\n                <div class=\"col-12 mt-2\">\r\n                    <!-- Dropdown per selezionare il numero di elementi visualizzati per pagina -->\r\n                    <div class=\"d-flex justify-content-center align-items-center\">\r\n                        {{\"generic.items\"|translate}}\r\n                        <label for=\"updateItemPerPage\"></label>\r\n                        <select id=\"updateItemPerPage\" #itemPerPage class=\"form-select shadow-none ms-2\"\r\n                            (change)=\"updateItemPerPage(itemPerPage.value)\">\r\n                            <option default hidden>{{userDto?.propertiesDTO?.itemPage}}</option>\r\n                            <option>{{'5'}}</option>\r\n                            <option>{{'20'}}</option>\r\n                            <option>{{'50'}}</option>\r\n                        </select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-12 mt-2\">\r\n                    <!-- Dropdown per selezionare la lingua di visualizzazione della pagina -->\r\n                    <div ngbDropdown class=\"dropdown\">\r\n                        <button ngbDropdownToggle class=\"btn\">\r\n                            <img alt=\"language flag\"\r\n                                src='assets/images/{{userDto?.propertiesDTO?.defaultLanguage}}.png'>\r\n                        </button>\r\n                        <div ngbDropdownMenu>\r\n                            <button *ngFor=\"let language of languages\" class=\"btn\" ngbDropdownItem\r\n                                (click)=\"updateLanguage(language.langIdentifier)\">\r\n                                <img alt=\"flagLanguageDropdown\" src='{{language.flagPath}}'>\r\n                            </button>\r\n                        </div>\r\n                        {{ \"lang.def-lang\" | translate }}\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-12 mt-2\">\r\n                    <!-- Dropdown per selezionare il nuovo status -->\r\n                    <div ngbDropdown class=\"dropdown\">\r\n                        <button ngbDropdownToggle class=\"btn\">\r\n                            <img alt=\"user status\" src=\"assets/images/{{ userDto?.propertiesDTO?.status }}.png\" />\r\n                        </button>\r\n                        <div ngbDropdownMenu>\r\n                            <button *ngFor=\"let status of stati\" class=\"btn\" ngbDropdownItem\r\n                                (click)=\"updateStatus(status.name)\">\r\n                                <img alt=\"{{status.name}}\" src=\"{{ status.iconPath }}\" />\r\n                                <span>{{\"generic.\"+status.name | translate}}</span>\r\n                            </button>\r\n                        </div>\r\n                        {{ \"generic.status\" | translate }}\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</main>\r\n\r\n<!-- footer -->\r\n<ng-content select=\"[footer]\"></ng-content>", styles: [".row{margin:1.125rem 1.25rem 0rem}select{max-width:5rem}.dropdown-menu{border-radius:.625rem;min-width:inherit;padding:.25rem}button:hover{background-color:transparent}.profile{object-fit:cover}.rounded-5{max-width:10rem;position:relative;left:50%;transform:translate(-50%);display:block;background-color:#130044;color:#fff}\n"] }]
+        }], ctorParameters: function () { return [{ type: AuthService }, { type: UserService }, { type: i2$1.TranslateService }]; } });
+
 class HeaderModule {
     static forRoot(config) {
         return {
@@ -571,32 +697,35 @@ class HeaderModule {
         };
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: HeaderModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: HeaderModule, declarations: [HeaderComponent], imports: [CommonModule,
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.2.12", ngImport: i0, type: HeaderModule, declarations: [HeaderComponent, ProfileComponent], imports: [CommonModule,
             TranslateModule,
             FontAwesomeModule,
             NgbModule,
             RouterModule,
-            HttpClientModule], exports: [HeaderComponent] }); }
+            HttpClientModule,
+            FormsModule], exports: [HeaderComponent, ProfileComponent] }); }
     static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: HeaderModule, imports: [CommonModule,
             TranslateModule,
             FontAwesomeModule,
             NgbModule,
             RouterModule,
-            HttpClientModule] }); }
+            HttpClientModule,
+            FormsModule] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImport: i0, type: HeaderModule, decorators: [{
             type: NgModule,
             args: [{
-                    declarations: [HeaderComponent],
+                    declarations: [HeaderComponent, ProfileComponent],
                     imports: [
                         CommonModule,
                         TranslateModule,
                         FontAwesomeModule,
                         NgbModule,
                         RouterModule,
-                        HttpClientModule
+                        HttpClientModule,
+                        FormsModule
                     ],
-                    exports: [HeaderComponent]
+                    exports: [HeaderComponent, ProfileComponent]
                 }]
         }] });
 
@@ -608,5 +737,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.12", ngImpo
  * Generated bundle index. Do not edit.
  */
 
-export { HeaderComponent, HeaderModule };
+export { HeaderComponent, HeaderModule, ProfileComponent };
 //# sourceMappingURL=cube-shared.mjs.map

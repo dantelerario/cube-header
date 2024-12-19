@@ -4,25 +4,28 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
-import { HeaderComponent } from './component/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { AuthService } from './services/auth/auth.service';
 import { UserService } from './services/user/user.service';
 import { WebSocketService } from './services/websocket/websocket.service';
 import { SharedConfig } from './types/shared.interface';
 import { NotificationService } from './services/notification/notification.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileComponent } from './components/profile/profile.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent,ProfileComponent],
   imports: [
     CommonModule,
     TranslateModule,
     FontAwesomeModule,
     NgbModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  exports: [HeaderComponent]
+  exports: [HeaderComponent,ProfileComponent]
 })
 export class HeaderModule {
   static forRoot(config: SharedConfig): ModuleWithProviders<HeaderModule> {

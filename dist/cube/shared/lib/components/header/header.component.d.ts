@@ -2,12 +2,12 @@ import { OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakLoginOptions } from 'keycloak-js';
-import { SharedConfig } from '../types/shared.interface';
-import { AuthService } from '../services/auth/auth.service';
-import { UserService } from '../services/user/user.service';
-import { WebSocketService } from '../services/websocket/websocket.service';
-import { Language, Status, UserDTO, Notification as CustomNotification } from '../types/types';
-import { NotificationService } from '../services/notification/notification.service';
+import { SharedConfig } from '../../types/shared.interface';
+import { AuthService } from '../../services/auth/auth.service';
+import { UserService } from '../../services/user/user.service';
+import { WebSocketService } from '../../services/websocket/websocket.service';
+import { Language, Status, UserDTO, Notification as CustomNotification } from '../../types/types';
+import { NotificationService } from '../../services/notification/notification.service';
 import * as i0 from "@angular/core";
 export declare class HeaderComponent implements OnInit, OnDestroy {
     private keycloak;

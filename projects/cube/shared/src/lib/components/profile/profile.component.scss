@@ -1,0 +1,31 @@
+.row {
+    margin: 1.125rem 1.25rem 0rem 1.25rem;
+}
+
+select {
+    max-width: 5rem;
+}
+
+.dropdown-menu {
+    border-radius: 0.625rem;
+    min-width: inherit;
+    padding: 0.25rem;
+}
+
+button:hover {
+    background-color: transparent;
+}
+
+.profile {
+    object-fit: cover;
+}
+
+.rounded-5 {
+    max-width: 10rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    background-color: #130044;
+    color: white;
+}

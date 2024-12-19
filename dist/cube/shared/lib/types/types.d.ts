@@ -75,3 +75,7 @@ export type PaginatedNotificationsDTO = {
     notificationDTO: Notification[];
     notificationTotalCount: number;
 };
+export type AlertMessage = {
+    message: string;
+    params?: string;
+};

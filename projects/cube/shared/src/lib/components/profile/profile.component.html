@@ -1,0 +1,100 @@
+<!-- header -->
+<ng-content select="cube-header"></ng-content>
+
+
+<div class="container-fluid">
+    <div class="row row-fluid">
+        <div class="col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/">{{'Home'}}</a></li>
+                <li class="breadcrumb-item active">{{"Profile" | translate}}</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<main class="container-fluid text-center fs-6">
+    <!-- Sezione immagine profilo -->
+    <div class="row row-fluid justify-content-center">
+        <ng-content select="[messages]"></ng-content>
+        <div class="col-12 col-xl-3">
+            <img alt="profilePicture" class="mb-2 profile" [src]="userDto?.propertiesDTO?.profilePicture" width="175"
+                height="175">
+            <form>
+                <label for="uploadImage" class="mb-1">{{"generic.update-propic" | translate}}</label>
+                <label class="btn rounded-5">
+                    {{"generic.select-file" | translate}}
+                    <input style="display: none;" name="uploadImage" id="uploadImage" class="rounded-5" type="file"
+                        (change)="uploadImage($event)">
+                </label>
+            </form>
+        </div>
+
+        <!-- Sezione informazioni utente -->
+        <div class="col-12 col-md-12 col-xl-4">
+            <div class="row g-4">
+                <div class="col-12">
+                    {{"generic.name"|translate}}: {{userDto?.name}}
+                </div>
+                <div class="col-12">
+                    {{"generic.surname"|translate}}: {{userDto?.surname}}
+                </div>
+                <div class="col-12">
+                    E-mail: {{userDto?.email}}
+                    <span class="ms-2" *ngIf="userDto?.validate">
+                        <img class="default-image" src="assets/images/verified.png" alt="">
+                    </span>
+                </div>
+                <div class="col-12 mt-2">
+                    <!-- Dropdown per selezionare il numero di elementi visualizzati per pagina -->
+                    <div class="d-flex justify-content-center align-items-center">
+                        {{"generic.items"|translate}}
+                        <label for="updateItemPerPage"></label>
+                        <select id="updateItemPerPage" #itemPerPage class="form-select shadow-none ms-2"
+                            (change)="updateItemPerPage(itemPerPage.value)">
+                            <option default hidden>{{userDto?.propertiesDTO?.itemPage}}</option>
+                            <option>{{'5'}}</option>
+                            <option>{{'20'}}</option>
+                            <option>{{'50'}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 mt-2">
+                    <!-- Dropdown per selezionare la lingua di visualizzazione della pagina -->
+                    <div ngbDropdown class="dropdown">
+                        <button ngbDropdownToggle class="btn">
+                            <img alt="language flag"
+                                src='assets/images/{{userDto?.propertiesDTO?.defaultLanguage}}.png'>
+                        </button>
+                        <div ngbDropdownMenu>
+                            <button *ngFor="let language of languages" class="btn" ngbDropdownItem
+                                (click)="updateLanguage(language.langIdentifier)">
+                                <img alt="flagLanguageDropdown" src='{{language.flagPath}}'>
+                            </button>
+                        </div>
+                        {{ "lang.def-lang" | translate }}
+                    </div>
+                </div>
+                <div class="col-12 mt-2">
+                    <!-- Dropdown per selezionare il nuovo status -->
+                    <div ngbDropdown class="dropdown">
+                        <button ngbDropdownToggle class="btn">
+                            <img alt="user status" src="assets/images/{{ userDto?.propertiesDTO?.status }}.png" />
+                        </button>
+                        <div ngbDropdownMenu>
+                            <button *ngFor="let status of stati" class="btn" ngbDropdownItem
+                                (click)="updateStatus(status.name)">
+                                <img alt="{{status.name}}" src="{{ status.iconPath }}" />
+                                <span>{{"generic."+status.name | translate}}</span>
+                            </button>
+                        </div>
+                        {{ "generic.status" | translate }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- footer -->
+<ng-content select="[footer]"></ng-content>

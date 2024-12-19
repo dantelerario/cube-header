@@ -3,15 +3,15 @@ import { TranslateService } from '@ngx-translate/core';
 import { faCube } from '@fortawesome/free-solid-svg-icons';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakLoginOptions } from 'keycloak-js';
-import { SharedConfig } from '../types/shared.interface';
-import { AuthService } from '../services/auth/auth.service';
-import { UserService } from '../services/user/user.service';
-import { WebSocketService } from '../services/websocket/websocket.service';
-import { Language,Status,UserDTO,Notification as CustomNotification } from '../types/types';
-import { NotificationService } from '../services/notification/notification.service';
+import { SharedConfig } from '../../types/shared.interface';
+import { AuthService } from '../../services/auth/auth.service';
+import { UserService } from '../../services/user/user.service';
+import { WebSocketService } from '../../services/websocket/websocket.service';
+import { Language,Status,UserDTO,Notification as CustomNotification } from '../../types/types';
+import { NotificationService } from '../../services/notification/notification.service';
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { IMAGES } from '../constants/image-constants';
+import { IMAGES } from '../../constants/image-constants';
 
 @Component({
   selector: 'cube-header',
@@ -21,6 +21,7 @@ import { IMAGES } from '../constants/image-constants';
 export class HeaderComponent implements OnInit,OnDestroy {
   @Input() properties: any;
   @Input() showNotifications: boolean = false;
+  
   //valori di default per i loghi
   /**
    * va passato il path dell'immagine nel selector del component padre
